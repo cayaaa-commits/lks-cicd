@@ -11,21 +11,21 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up Node.jobs
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: install dependencial
+      - name: install dependencies
         run: npm install
 
       - name: build zip
         run: zip -r latihan-cicd.zip . -x "node_modules/*"
 
       - name: Upload build artifacts
-        uses: actions/upload-aerifacts@v3
+        uses: actions/upload-artifact@v4
         with:
           name: latihan-cicd
           path: latihan-cicd.zip
@@ -51,11 +51,11 @@ jobs:
 
     steps:
     - name: Download build artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: latihan-cicd
 
-    - name: Deploy to Elastic
+    - name: Deploy to Elastic Beanstalk
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
